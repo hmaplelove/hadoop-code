@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:hadoop="http://www.springframework.org/schema/hadoop"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:c="http://www.springframework.org/schema/c"
+	xsi:schemaLocation="http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.1.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/hadoop http://www.springframework.org/schema/hadoop/spring-hadoop.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.1.xsd">
+	<context:component-scan base-package="com.casicloud.aop.hadoop"/>
+	<hadoop:configuration resources="classpath:/hbase-site.xml"/>
+	<hadoop:hbase-configuration configuration-ref="hadoopConfiguration" delete-connection="false"/>
+	<bean id="hbaseTemplate" class="org.springframework.data.hadoop.hbase.HbaseTemplate" p:configuration-ref="hbaseConfiguration" p:encoding="UTF-8"/>
+
+	<bean id="logbackNosqlFactory" class="com.casicloud.aop.log.logback.NosqlAppenderFactoryBean">
+		<!--数据库操作类-->
+		<property name="template" ref="hbaseTemplate"/>
+		<!--日志存储表名-->
+		<property name="tbname" value="logdata"/>
+		<!--Logback Appender 类全路径-->
+		<property name="appenderPath" value="com.casicloud.aop.log.logback.hbase.HbaseAppender"/>
+	</bean>
+	<!--单个LOGGER配置-->
+	<bean id="hbaseAppender" class="com.casicloud.aop.log.logback.SpringLogbackBean" lazy-init="false">
+		<property name="appenderName" value="hbaseAppender"/>
+		<property name="logLevel" value="INFO"/>
+		<property name="filterLevel" value="INFO"/>
+		<property name="logName" value="root"/>
+		<property name="appender" ref="logbackNosqlFactory"/>
+	</bean>
+	<bean id="hbaseLogRepository" class="com.casicloud.aop.log.logback.hbase.HbaseLogRepository">
+		<property name="hbaseTemplate" ref="hbaseTemplate"/>
+		<property name="tbname" value="logdata"/>
+	</bean>
+	<!--多个LOGGER配置-->
+	<!-- <bean id="hbaseappender2" class="com.casicloud.aop.log.logback.SpringLogbackBean" lazy-init="false">
+		<property name="appenderName" value="hbaseappender2"/>
+		<property name="filterLevel" value="WARN"/>
+		<property name="logName">
+			<map>
+				<entry key="logbackhbaseappendertest2" value="WARN"/>
+				<entry key="logbackhbaseappendertest3" value="WARN"/>
+			</map>
+		</property>
+		<property name="appender" ref="logbackNosqlFactory"/>
+	</bean> -->
+	<bean id="hiveDataSource" class="org.springframework.jdbc.datasource.SimpleDriverDataSource" p:driverClass="org.apache.hive.jdbc.HiveDriver" p:url="jdbc:hive2://centos1:10000/default" p:username="root" p:password="123456" />
+	<bean id="hiveTemplate" class="org.springframework.jdbc.core.JdbcTemplate" p:dataSource-ref="hiveDataSource"/>
+	
+</beans>
