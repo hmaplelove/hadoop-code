@@ -6,7 +6,7 @@ public class ConsumerTest {
 	
 	@SuppressWarnings("resource")
 	public static void main(String[] args) {
-		ClassPathXmlApplicationContext applicationContext=new ClassPathXmlApplicationContext(new String[]{"spring-consumer.xml","spring-hdfs.xml"});
+		ClassPathXmlApplicationContext applicationContext=new ClassPathXmlApplicationContext(new String[]{"spring-consumer.xml"});
 		applicationContext.start();
 	}
 }

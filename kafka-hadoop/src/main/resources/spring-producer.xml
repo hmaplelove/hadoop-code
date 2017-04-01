@@ -17,7 +17,7 @@
     <int-kafka:outbound-channel-adapter kafka-producer-context-ref="kafkaProducerContext"
                                         auto-startup="true"
                                         channel="inputToKafka"
-                                        order="1">
+                                        order="1"> 
     </int-kafka:outbound-channel-adapter>
 
     <bean id="producerProperties" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
@@ -35,10 +35,11 @@
     <int-kafka:producer-context id="kafkaProducerContext" producer-properties="producerProperties">
         <int-kafka:producer-configurations>
             <int-kafka:producer-configuration broker-list="${broker.list}"
+            								  key-class-type="java.lang.String"
                                               key-serializer="stringSerializer"
                                               value-class-type="java.lang.String"
                                               value-serializer="stringSerializer"
-                                              topic="IOT_Topic"/>
+                                              topic="IOT_DATA" />
         </int-kafka:producer-configurations>
     </int-kafka:producer-context>
 </beans>

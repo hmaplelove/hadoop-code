@@ -23,7 +23,7 @@
             channel="inputFromKafka">
         <int:poller fixed-delay="1" time-unit="MILLISECONDS"/>
     </int-kafka:inbound-channel-adapter>
-
+    
     <bean id="kafkaDecoder" class="org.springframework.integration.kafka.serializer.common.StringDecoder"/>
 
     <bean id="consumerProperties" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
@@ -47,7 +47,7 @@
                                               value-decoder="kafkaDecoder"
                                               key-decoder="kafkaDecoder"
                                               max-messages="5000">
-                <int-kafka:topic id="IOT_Topic" streams="4"/>
+                <int-kafka:topic id="IOT_DATA" streams="4"/>
             </int-kafka:consumer-configuration>
         </int-kafka:consumer-configurations>
     </int-kafka:consumer-context>	

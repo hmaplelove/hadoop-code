@@ -6,6 +6,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.integration.kafka.support.KafkaHeaders;
 import org.springframework.integration.support.MessageBuilder;
 import org.springframework.messaging.Message;
@@ -24,9 +25,9 @@ public class ProducerTest {
 	
 	@Test
 	public void send() throws Exception{
-		for (Map<Object, Object> data : DataUtils.grenData(100000l)) {
+		for (Map<Object, Object> data : DataUtils.grenData(10l)) {
 			Message<String> msg = MessageBuilder.withPayload(new Gson().toJson(data))
-					.setHeader(KafkaHeaders.TOPIC, "IOT_Topic").build();
+					.setHeader(KafkaHeaders.TOPIC, "IOT_DATA").build();
 			channel.send(msg);
 			//System.out.println(data.toString());
 		}

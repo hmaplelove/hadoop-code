@@ -3,11 +3,17 @@ package com.casicloud.aop.kafka.core;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.casicloud.aop.kafka.HDFSClinet;
@@ -20,6 +26,7 @@ public class KafkaHdfsService implements KafkaService{
 	
 	@Autowired 
 	HDFSClinet HdfsClinet;
+	private static final Logger logger = LoggerFactory.getLogger(KafkaHdfsService.class);
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	public void processMessage(Map<Object, Map<Object, Object>> message) throws IOException{
@@ -27,6 +34,7 @@ public class KafkaHdfsService implements KafkaService{
             System.out.println("Suchit Topic:" + entry.getKey());
             for (Entry<Object, Object> msg : entry.getValue().entrySet()) {
             	List<String> list=(List<String>) msg.getValue();
+            	System.out.println("key=========>"+msg.getKey());
             	for (String json : list) {
             		Map data=new Gson().fromJson(json, Map.class);
             		String equipment=data.get("equipment").toString();
@@ -61,7 +69,8 @@ public class KafkaHdfsService implements KafkaService{
             		if (key.trim().equals("pressure")) {
             			pressuresMap.get(equipment.trim()).add(json);
             		}
-            		//System.out.println("Suchit Consumed Message: " + data);
+            		
+            		logger.info(json);
 				}
             	
             	

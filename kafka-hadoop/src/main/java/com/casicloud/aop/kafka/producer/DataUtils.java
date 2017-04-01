@@ -8,11 +8,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-import org.junit.Test;
-
 public class DataUtils {
 
-	@Test
 	public static List<Map<Object, Object>> grenData(Long num) {
 		String [] iotids=new String[]{"iot0001","iot0002","iot0003","iot0004","iot0005"};
 		String [] equipments=new String[]{"plc0001","plc0002","plc0003","plc0004","plc0005","plc0006","plc0007","plc0008","plc0009","plc00010"};
