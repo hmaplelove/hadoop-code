@@ -25,8 +25,9 @@ public class ProducerTest {
 	
 	@Test
 	public void send() throws Exception{
-		for (Map<Object, Object> data : DataUtils.grenData(10l)) {
+		for (Map<Object, Object> data : DataUtils.grenData(100l)) {
 			Message<String> msg = MessageBuilder.withPayload(new Gson().toJson(data))
+					.setHeader(KafkaHeaders.MESSAGE_KEY, data.get("key").toString())
 					.setHeader(KafkaHeaders.TOPIC, "IOT_DATA").build();
 			channel.send(msg);
 			//System.out.println(data.toString());

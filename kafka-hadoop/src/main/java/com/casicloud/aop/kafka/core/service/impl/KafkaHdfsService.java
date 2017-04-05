@@ -1,4 +1,4 @@
-package com.casicloud.aop.kafka.core;
+package com.casicloud.aop.kafka.core.service.impl;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -17,20 +17,29 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.casicloud.aop.kafka.HDFSClinet;
+import com.casicloud.aop.kafka.core.service.KafkaService;
 import com.google.gson.Gson;
 
 public class KafkaHdfsService implements KafkaService{
 
-	private static SimpleDateFormat sdf=new SimpleDateFormat("yyyyMMdd");
+	/*private static SimpleDateFormat sdf=new SimpleDateFormat("yyyyMMdd");
 	private static Map<String, List<String>> pressuresMap = new HashMap<String, List<String>>();
 	
 	@Autowired 
-	HDFSClinet HdfsClinet;
+	HDFSClinet HdfsClinet;*/
 	private static final Logger logger = LoggerFactory.getLogger(KafkaHdfsService.class);
-	@SuppressWarnings({ "unchecked", "rawtypes" })
+	
 	@Override
 	public void processMessage(Map<Object, Map<Object, Object>> message) throws IOException{
-		 for (Map.Entry < Object,Map<Object, Object>>entry:  message.entrySet()){
+		logger.info("HDFS...");
+		onMessage(message);
+		
+	}
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	private void onMessage(Map<Object, Map<Object, Object>> message) throws IOException {
+		System.out.println(new Gson().toJson(message));
+		/*
+		for (Map.Entry < Object,Map<Object, Object>>entry:  message.entrySet()){
             System.out.println("Suchit Topic:" + entry.getKey());
             for (Entry<Object, Object> msg : entry.getValue().entrySet()) {
             	List<String> list=(List<String>) msg.getValue();
@@ -76,6 +85,6 @@ public class KafkaHdfsService implements KafkaService{
             	
             }
         }
-	}
+	*/}
 
 }

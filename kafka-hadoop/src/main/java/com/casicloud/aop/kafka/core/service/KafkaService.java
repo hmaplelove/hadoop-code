@@ -1,4 +1,4 @@
-package com.casicloud.aop.kafka.core;
+package com.casicloud.aop.kafka.core.service;
 
 import java.io.IOException;
 import java.util.Map;
