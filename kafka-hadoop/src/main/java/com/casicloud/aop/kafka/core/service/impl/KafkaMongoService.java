@@ -29,10 +29,8 @@ public class KafkaMongoService implements KafkaService{
 	private void onMessage(Map<Object, Map<Object, Object>> message) throws Exception {
 
 		for (Map.Entry < Object,Map<Object, Object>>entry:  message.entrySet()){
-			logger.info("Suchit Topic:" + entry.getKey());
             for (Entry<Object, Object> msg : entry.getValue().entrySet()) {
             	List<String> list=(List<String>) msg.getValue();
-            	logger.info("key=========>"+msg.getKey());
             	for (String json : list) {
             		logger.info(gson.toJson(json));
             		HashMap params=gson.fromJson(json, HashMap.class);

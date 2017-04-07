@@ -48,7 +48,13 @@
                                               key-serializer="stringSerializer"
                                               value-class-type="java.lang.String"
                                               value-serializer="stringSerializer"
-                                              topic="IOT_DATA_STORM" />
+                                              topic="IOT_DATA_MAXDOWN" />
+            <int-kafka:producer-configuration broker-list="${broker.list}"
+            								  key-class-type="java.lang.String"
+                                              key-serializer="stringSerializer"
+                                              value-class-type="java.lang.String"
+                                              value-serializer="stringSerializer"
+                                              topic="IOT_DATA_MAXUP" />
         </int-kafka:producer-configurations>
     </int-kafka:producer-context>
 </beans>

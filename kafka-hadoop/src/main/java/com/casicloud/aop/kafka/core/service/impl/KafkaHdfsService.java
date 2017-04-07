@@ -16,7 +16,8 @@ public class KafkaHdfsService implements KafkaService{
 	
 	@Autowired 
 	HDFSClinet HdfsClinet;*/
-	private static final Logger logger = LoggerFactory.getLogger(KafkaHdfsService.class);
+	private static final Logger logger = LoggerFactory.getLogger(KafkaStormService.class);
+	private static Gson gson=new Gson();
 	
 	@Override
 	public void processMessage(Map<Object, Map<Object, Object>> message) throws IOException{
@@ -25,7 +26,7 @@ public class KafkaHdfsService implements KafkaService{
 		
 	}
 	private void onMessage(Map<Object, Map<Object, Object>> message) throws IOException {
-		System.out.println(new Gson().toJson(message));
+		logger.info(gson.toJson(message));
 		/*
 		for (Map.Entry < Object,Map<Object, Object>>entry:  message.entrySet()){
             System.out.println("Suchit Topic:" + entry.getKey());

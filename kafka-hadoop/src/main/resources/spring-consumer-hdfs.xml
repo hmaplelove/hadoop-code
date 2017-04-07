@@ -25,7 +25,7 @@
 
     <int-kafka:consumer-context id="consumerHdfsContext" consumer-timeout="1000" zookeeper-connect="zookeeperConnect" consumer-properties="consumerProperties">
         <int-kafka:consumer-configurations>
-            <int-kafka:consumer-configuration group-id="group_hdfs"
+            <int-kafka:consumer-configuration group-id="group_hdfs_dev"
                                               value-decoder="kafkaDecoder"
                                               key-decoder="kafkaDecoder"
                                               max-messages="5000">

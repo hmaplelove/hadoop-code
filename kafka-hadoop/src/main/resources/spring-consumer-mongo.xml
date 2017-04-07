@@ -26,7 +26,7 @@
 
     <int-kafka:consumer-context id="consumerMongoContext" consumer-timeout="1000" zookeeper-connect="zookeeperConnect" consumer-properties="consumerProperties">
         <int-kafka:consumer-configurations>
-            <int-kafka:consumer-configuration group-id="group_mongo"
+            <int-kafka:consumer-configuration group-id="group_mongo_dev"
                                               value-decoder="kafkaDecoder"
                                               key-decoder="kafkaDecoder"
                                               max-messages="5000">
