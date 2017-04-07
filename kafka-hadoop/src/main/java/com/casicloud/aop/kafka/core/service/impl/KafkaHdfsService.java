@@ -1,22 +1,11 @@
 package com.casicloud.aop.kafka.core.service.impl;
 
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 
-import com.casicloud.aop.kafka.HDFSClinet;
 import com.casicloud.aop.kafka.core.service.KafkaService;
 import com.google.gson.Gson;
 
@@ -35,7 +24,6 @@ public class KafkaHdfsService implements KafkaService{
 		onMessage(message);
 		
 	}
-	@SuppressWarnings({ "unchecked", "rawtypes" })
 	private void onMessage(Map<Object, Map<Object, Object>> message) throws IOException {
 		System.out.println(new Gson().toJson(message));
 		/*

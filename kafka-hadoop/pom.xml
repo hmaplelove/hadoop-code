@@ -15,7 +15,6 @@
   		<artifactId>mongodb-common</artifactId>
   		<version>0.0.1-SNAPSHOT</version>
   	</dependency>
-  	
   	<dependency>
   		<groupId>org.springframework.data</groupId>
   		<artifactId>spring-data-hadoop</artifactId>
@@ -50,7 +49,19 @@
 	    <systemPath>${JAVA_HOME}/lib/tools.jar</systemPath>  
 	</dependency> 
   </dependencies>
+  
   <build>
+  <resources>
+     <!-- 控制资源文件的拷贝 -->
+     <resource>
+         <directory>src/main/resources</directory>
+         <includes>
+             <include>**/*.properties</include>
+             <include>**/*.xml</include>
+             <include>**/*.tld</include>
+         </includes>
+     </resource>
+    </resources>
   	<plugins>
   		<plugin>
   			<groupId>org.apache.maven.plugins</groupId>
